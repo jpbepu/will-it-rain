@@ -14,8 +14,10 @@ async function getWeather() {
         }
         const ip = await response.json();
 
+        console.log(ip)
+
         // 2ª requisição: usa a cidade do IP obtido para fazer a segunda chamada
-        const response2 = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${weatherToken}&q=${ip.city}&days=7&aqi=no&alerts=no`);
+        const response2 = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherToken}&q=${ip.city}&days=7&aqi=no&alerts=no`);
         if (!response2.ok) {
         throw new Error('Erro na requisição da API 2');
         }
