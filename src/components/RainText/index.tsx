@@ -1,18 +1,12 @@
 import { Text } from "./style"
 
 
-type Props = {
-    isRaining: boolean,
-    days?: number
-}
-
-const RainText = ({isRaining, days}:Props) => {
+const RainText = ({days}:any) => {
     return (
         <>
-            {isRaining
-                ? <Text>Esta chovendo</Text>
-                : <Text>Vai chover em {days} dias</Text>
-            }
+
+            <Text>Vai chover em {days} dia(s)</Text>
+            
         </>
 
     )
