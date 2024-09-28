@@ -7,29 +7,40 @@ type IconURL = {
 
 
 export const Container = styled.div`
-    height: 45vh;
     width: 100vw;
 
     position: fixed;
     bottom: 0;
     backdrop-filter: blur(10px) brightness(90%);
 
-    padding: 40px 80px;
+    padding: 32px 80px;
+
+    @media screen and (max-width: 880px) {
+        padding: 3vh 5vw;
+    }
 
 `
 
 
 export const Wrapper = styled.div`
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     height: 100%;
+
 
 
     .upper-row{
 
         display: flex;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
+        margin-right: 40px;
+
+        
+        animation-name: fadeIn;
+        animation-duration: 500ms;
+        animation-delay: 100ms;
+        animation-fill-mode: both;
         
 
         .current-weather{
@@ -63,29 +74,59 @@ export const Wrapper = styled.div`
             }
         }
 
-        .infos{
-
-            .city{
-            }
-
-            .weather-name{
-
-            }
+        @media screen and (max-width: 880px) {
+            margin: 0;
         }
     }
 
     .lower-row{
 
-        height: 40%;
+        height: 100%;
+
+        animation-name: fadeIn;
+        animation-duration: 500ms;
+        animation-delay: 200ms;
+        animation-fill-mode: both;
+
+
+        
 
         ul{
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-between;
+            padding: 16px;
             height: 100%;
             width: 100%;
+            max-width: 1024px;
+            min-width: 720px;
+
+            
+        }
+
+        @media screen and (max-width: 880px) {
+            overflow-x: scroll;
         }
 
 
+    }
+
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0%;
+            transform: translateY(20px);
+        }
+
+        to{
+            transform: translateY(0);
+            opacity: 100%;
+        }
+    }
+
+
+    @media screen and (max-width: 1350px) {
+        flex-direction: column;
+        align-items: normal;
     }
 
 `
@@ -93,6 +134,7 @@ export const Wrapper = styled.div`
 
 export const ForecastItem = styled.li<IconURL>`
     width: 10%;
+    min-width: 80px;
     height: 100%;
     padding: 4px;
 

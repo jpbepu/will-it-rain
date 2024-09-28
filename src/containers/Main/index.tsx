@@ -100,15 +100,15 @@ const Main = () => {
     console.log('Estado:', weatherData)
     return (
         <>
-            <Background/>
             {weatherData && (
                 <>
                     <RainText days={nextRain}/>
                     <BlurContainer
                         weather={weatherData}
-                    />
+                        />
                 </>
             )}
+            <Background/>
         </>
     )
 }

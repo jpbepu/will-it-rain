@@ -5,7 +5,11 @@ const RainText = ({days}:any) => {
     return (
         <>
 
-            <Text>Vai chover em {days} dia(s)</Text>
+            <Text>
+                <h1>
+                    Vai chover em {days} dia(s)
+                </h1>
+            </Text>
             
         </>
 
