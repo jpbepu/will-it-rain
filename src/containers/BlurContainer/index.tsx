@@ -12,7 +12,7 @@ const BlurContainer = (props : any) => {
     const min = props.weather.current.min
     const max = props.weather.current.max
     const forecast = props.weather.forecast
-
+    const isDay = props.isDay
 
 
     
@@ -24,7 +24,7 @@ const BlurContainer = (props : any) => {
 
 
     return (
-        <Container>
+        <Container isDay={isDay}>
             <Wrapper>
 
 

@@ -1,11 +1,21 @@
-import { Basic } from "./style"
+import { Day, Night } from "./style"
 
 
-const Background = () => {
+const Background = ({isDay}:any) => {
+    console.log('isDay', isDay)
     return (
-        <Basic>
-            <div></div>
-        </Basic>
+        <>
+            {isDay === 1 ? (
+                <Day>
+                    <div></div>
+                </Day>
+
+            ) : (
+                <Night>
+                    <div></div>
+                </Night>
+            )}
+        </>
     )
 }
 

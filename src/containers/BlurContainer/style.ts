@@ -5,15 +5,25 @@ type IconURL = {
     url?:string
 }
 
+export type isDay = {
+    isDay?:number
+}
 
-export const Container = styled.div`
+
+export const Container = styled.div<isDay>`
     width: 100vw;
+
+    z-index: 5;
 
     position: fixed;
     bottom: 0;
     backdrop-filter: blur(10px) brightness(90%);
 
     padding: 32px 80px;
+
+    & *{
+        color: ${(props) => props.isDay === 0? 'white' : '#252525'};
+    }
 
     @media screen and (max-width: 880px) {
         padding: 3vh 5vw;
@@ -27,6 +37,8 @@ export const Wrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    
+
 
 
 

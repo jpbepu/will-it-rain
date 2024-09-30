@@ -1,11 +1,11 @@
 import { Text } from "./style"
 
 
-const RainText = ({days}:any) => {
+const RainText = ({days, isDay}:any) => {
     return (
         <>
 
-            <Text>
+            <Text isDay={isDay}>
                 <h1>
                     Vai chover em {days} dia(s)
                 </h1>

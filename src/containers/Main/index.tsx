@@ -3,13 +3,8 @@ import RainText from "../../components/RainText"
 import Background from "../Background"
 import BlurContainer from "../BlurContainer"
 
-const weatherAPIToken = '38f114272b3040ea9a8160421241009'
-const openWeatherToken = '007bf5c8e1d0382b49b89ed119a2dbc5'
-
-
-
-
-
+const weatherAPIToken = process.env.REACT_APP_WEATHERAPI_TOKEN
+const openWeatherToken = process.env.REACT_APP_OPENWEATHER_TOKEN
 
 
 
@@ -17,6 +12,8 @@ const Main = () => {
 
     const [weatherData, setWeatherData] = useState(null)
     const [nextRain, setnextRain] = useState(-1)
+    const [isDay, setIsDay] = useState(1)
+    const [isLoading, setIsLoading] = useState(true)
     
 
 
@@ -64,7 +61,6 @@ const Main = () => {
             const customObject: any = {
                 current: {
                     condition: openWeatherMap.current.weather[0],
-                    is_day: weatherAPI.current.is_day,
                     temp: weatherAPI.current.temp_c,
                     max: weatherAPI.forecast.forecastday[0].day.maxtemp_c,
                     min: weatherAPI.forecast.forecastday[0].day.mintemp_c
@@ -81,6 +77,9 @@ const Main = () => {
 
             // Armazena o numero de dias ate a proxima chuva
             setnextRain(daysTillRain(openWeatherMap.daily)) 
+
+            // Armazena no estado se esta de dia
+            setIsDay(weatherAPI.current.is_day)
     
     
             console.log('Resposta da Weather API:', weatherAPI);
@@ -89,6 +88,10 @@ const Main = () => {
     
         } catch (error) {
             console.error('Erro durante as requisições:', error);
+        } finally {
+            // Desativa o estado de carregamento
+            setTimeout(() => {setIsLoading(false)}, 1000)
+            
         }
     }
 
@@ -100,15 +103,18 @@ const Main = () => {
     console.log('Estado:', weatherData)
     return (
         <>
-            {weatherData && (
+            {isLoading ? (
+                // Tela de carregamento
+                <div className="loading-screen">
+                    <span className="loader"></span>
+                </div>
+            ) : (
                 <>
-                    <RainText days={nextRain}/>
-                    <BlurContainer
-                        weather={weatherData}
-                        />
+                    <RainText days={nextRain} isDay={isDay}/>
+                    <BlurContainer weather={weatherData} isDay={isDay} />
+                    <Background isDay={isDay}/>
                 </>
             )}
-            <Background/>
         </>
     )
 }
