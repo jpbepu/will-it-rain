@@ -35,7 +35,7 @@ const Main = () => {
 
         try {
             // 1a requisição: pega a cidade do usuario
-            const response = await fetch('http://ip-api.com/json/');
+            const response = await fetch('https://ip-api.com/json/');
             if (!response.ok) {
                 throw new Error('Erro na requisição da API de IP do usuário');
             }
