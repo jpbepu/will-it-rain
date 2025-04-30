@@ -3,6 +3,7 @@ import RainText from "../../components/RainText"
 import Background from "../Background"
 import BlurContainer from "../BlurContainer"
 
+const IPAPIToken = process.env.REACT_APP_IPAPI_TOKEN
 const weatherAPIToken = process.env.REACT_APP_WEATHERAPI_TOKEN
 const openWeatherToken = process.env.REACT_APP_OPENWEATHER_TOKEN
 
@@ -35,12 +36,12 @@ const Main = () => {
 
         try {
             // 1a requisição: pega a cidade do usuario
-            const response = await fetch('https://ip-api.com/json/');
+            const response = await fetch(`https://ipwho.is/`);
             if (!response.ok) {
                 throw new Error('Erro na requisição da API de IP do usuário');
             }
             const ip = await response.json();
-            console.log(ip)
+            console.log('IP:', ip)
     
             // 2a requisição: usa a cidade do IP obtido para fazer a segunda chamada para a WeatherAPI
             const response2 = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherAPIToken}&q=${ip.city}&days=3&aqi=no&alerts=no&lang=en_us`);
@@ -51,7 +52,7 @@ const Main = () => {
             console.log(weatherAPI)
 
             // 3a requisição: usa a latitude/longitude do IP obtido para fazer a terceira chamada para a OpenWeatherMap
-            const response3 = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${ip.lat}&lon=${ip.lon}&exclude=hourly,minutely,alerts&appid=${openWeatherToken}&units=metric&lang=pt_br`);
+            const response3 = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${ip.latitude}&lon=${ip.longitude}&exclude=hourly,minutely,alerts&appid=${openWeatherToken}&units=metric&lang=pt_br`);
             if (!response3.ok) {
             throw new Error('Erro na requisição da API do OpenWeatherMap');
             }
