@@ -35,7 +35,7 @@ const Main = () => {
 
         try {
             // 1a requisição: pega a cidade do usuario
-            const response = await fetch('https://ipapi.co/json/');
+            const response = await fetch('http://ip-api.com/json/');
             if (!response.ok) {
                 throw new Error('Erro na requisição da API de IP do usuário');
             }
@@ -48,13 +48,15 @@ const Main = () => {
             throw new Error('Erro na requisição da API do WeatherAPI');
             }
             const weatherAPI = await response2.json();
+            console.log(weatherAPI)
 
             // 3a requisição: usa a latitude/longitude do IP obtido para fazer a terceira chamada para a OpenWeatherMap
-            const response3 = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${ip.latitude}&lon=${ip.longitude}&exclude=hourly,minutely,alerts&appid=${openWeatherToken}&units=metric&lang=pt_br`);
+            const response3 = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${ip.lat}&lon=${ip.lon}&exclude=hourly,minutely,alerts&appid=${openWeatherToken}&units=metric&lang=pt_br`);
             if (!response3.ok) {
             throw new Error('Erro na requisição da API do OpenWeatherMap');
             }
             const openWeatherMap = await response3.json();
+            console.log(openWeatherMap)
 
             const tempForecast = openWeatherMap.daily.slice(1)
 
@@ -79,7 +81,7 @@ const Main = () => {
             setnextRain(daysTillRain(openWeatherMap.daily)) 
 
             // Armazena no estado se esta de dia
-            setIsDay(weatherAPI.current.is_day)
+            // setIsDay(weatherAPI.current.is_day)
     
     
             console.log('Resposta da Weather API:', weatherAPI);
@@ -98,9 +100,10 @@ const Main = () => {
     //Faz as requisicoes quando o componente e renderizado
     useEffect(() => {
         getWeather();
+        console.log('Estado:', weatherData)
     }, []);
 
-    console.log('Estado:', weatherData)
+
     return (
         <>
             {isLoading ? (
